@@ -1,11 +1,8 @@
-import React from "react";
-import StartRating from "./StarRating";
+import React, { useState } from "react";
+import colorData from "./color-data.json";
+import ColorList from "./ColorList";
 
 export default function App() {
-  return (
-    <StartRating
-      style={{ backgroundColor: "lightblue" }}
-      onDoubleClick={e => alert("double click")}
-    />
-  );
+  const [colors] = useState(colorData);
+  return <ColorList colors={colors} />;
 }
