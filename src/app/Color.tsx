@@ -1,9 +1,9 @@
 import React from "react";
 import StarRating from "./StarRating";
 import { FaTrash } from "react-icons/fa";
-import { useColors } from "./ColorProvider";
+import { color, useColors } from "./ColorProvider";
 
-export default function Color({ id, title, color, rating }) {
+export default function Color({ id, title, color, rating }:color) {
   const { rateColor, removeColor } = useColors();
   return (
     <section>
