@@ -11,6 +11,7 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/uuid": "^8.3.4",
+    "gas-client": "^1.0.0",
     "parcel": "^2.6.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

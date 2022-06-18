@@ -1,9 +1,10 @@
 import React from "react";
 import StarRating from "./StarRating";
 import { FaTrash } from "react-icons/fa";
-import { color, useColors } from "./ColorProvider";
+import { useColors } from "./ColorProvider";
+import Sheetdata from "../api/sheetdata";
 
-export default function Color({ id, title, color, rating }:color) {
+export default function Color({ id, title, color, rating }:Sheetdata.color) {
   const { rateColor, removeColor } = useColors();
   return (
     <section>

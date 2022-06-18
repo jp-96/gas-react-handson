@@ -1,6 +1,6 @@
 namespace Sheetdata {
 
-  interface color {
+  export interface color {
     id: string;
     title: string;
     color: string;
