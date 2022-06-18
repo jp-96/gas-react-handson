@@ -1,16 +1,11 @@
 import React, { createContext, useState, useContext } from "react";
-import colorData from "./color-data.json";
+//import colorData from "./color-data.json";
 import { v4 } from "uuid";
-
-export interface color {
-  id: string;
-  title: string;
-  color: string;
-  rating: number;
-};
+import Sheetdata from "../api/sheetdata";
+import { useGetSheetData } from './hooks';
 
 type ColorContextType = {
-  colors: color[];
+  colors: Sheetdata.color[];
   addColor: (title: string, color: string) => void;
   removeColor: (id: string) => void;
   rateColor: (id: string, rating: number) => void;
@@ -24,7 +19,7 @@ const ColorContext = createContext<ColorContextType>({
 });
 export const useColors = () => useContext(ColorContext);
 export default function ColorProvider({ children }) {
-  const [colors, setColors] = useState(colorData);
+  const { loading, error, colors, setColors } = useGetSheetData();
 
   const addColor = (title: string, color: string) =>
     setColors([
@@ -44,9 +39,25 @@ export default function ColorProvider({ children }) {
 
   const removeColor = (id: string) => setColors(colors.filter(color => color.id !== id));
 
+  if (error) {
+    return (
+      <>
+        <h1>Error</h1>
+        <pre>{JSON.stringify(error, null, 2)}</pre>
+      </>
+    );
+  }
+
+  if (loading) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
+
   return (
     <ColorContext.Provider value={{ colors, addColor, removeColor, rateColor }}>
       {children}
     </ColorContext.Provider>
   );
+
 }
