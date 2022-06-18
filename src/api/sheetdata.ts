@@ -43,7 +43,6 @@ namespace Sheetdata {
     }
     const maxRows = sheet.getMaxRows();
     if ((maxRows - 1) > sheetData.colors.length) {
-      sheet.getRange(sheetData.colors.length + 2, 1, maxRows - 1, 4).clearContent();
       sheet.deleteRows(sheetData.colors.length + 2, maxRows - sheetData.colors.length - 1);
     }
     if (sheetData.colors.length > 0) {

@@ -21,6 +21,7 @@ export const useGetSheetData = (): { loading: boolean, error: any, colors: Sheet
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [colors, setColors] = useState(emptyColors);
+  const [init, setInit] = useState(2); // 初期化時、読み込み完了時に呼び出されたときは、保存しない。
 
   useEffect(() => {
     serverFunctions.getData()
@@ -29,7 +30,16 @@ export const useGetSheetData = (): { loading: boolean, error: any, colors: Sheet
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    if (init > 0) {
+      setInit(init - 1);
+      return;
+    }
+    const sheetData: Sheetdata.SheetData = { colors };
+    serverFunctions.putData(sheetData);
+  }, [colors]);
+
   return {
     loading, error, colors, setColors,
   }
-} 
+}
